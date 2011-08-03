@@ -1,5 +1,7 @@
 
-test:
-	@echo "populate me"
+TESTS = $(shell find test -name "*.js")
 
-.PHONY: test
+test:
+	@./test/run
+
+.PHONY: test $(TESTS)
