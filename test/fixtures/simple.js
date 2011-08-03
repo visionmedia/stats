@@ -1,8 +1,9 @@
 
 var foo = 'foo'
   , bar = 'bar'
-  , baz = 'baz';
+  , baz = 'baz'
+  , test;
 
-console.log(foo);
+console.log(foo = 'hey');
 console.log(bar);
 console.log(baz);
