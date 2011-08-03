@@ -82,12 +82,20 @@ while (args.length) {
 
 // process
 
+var totals;
 jss.find(paths, function(err, files){
   var pending = files.length;
   files.forEach(function(file){
     fs.readFile(file, 'utf8', function(err, str){
       if (err) throw err;
       stats[file] = jss.stats(str);
+      if (totals) {
+        Object.keys(stats[file]).forEach(function(key){
+          totals[key] += stats[file][key];
+        });
+      } else {
+        totals = stats[file];
+      }
       --pending || done();
     });
   });
@@ -99,5 +107,7 @@ function done() {
   if (options.text) {}
   var format = jss.formats[options.format];
   if (!format) throw new Error('invalid format "' + options.format + '"');
-  format(stats);
+  var obj = { totals: totals };
+  for (var file in stats) obj[file] = stats[file];
+  format(obj);
 }
