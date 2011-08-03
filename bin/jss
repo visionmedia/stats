@@ -1,0 +1,58 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+var jss = require('../')
+  , fs = require('fs');
+
+/**
+ * Arguments.
+ */
+
+var args = process.argv.slice(2);
+
+/**
+ * Files to process.
+ */
+
+var files = [];
+
+/**
+ * Usage docs.
+ */
+
+var usage = [
+    ''
+  , '  Usage: jss [options] [file|dir ...]'
+  , ''
+  , '  Options:'
+  , ''
+  , '    -V, --version           Display the version of jss'
+  , '    -h, --help              Display help information'
+  , ''
+].join('\n');
+
+/**
+ * Handle arguments.
+ */
+
+var arg;
+while (args.length) {
+  arg = args.shift();
+  switch (arg) {
+    case '-h':
+    case '--help':
+    case 'help':
+      console.log(usage);
+      process.exit(1);
+    case '-V':
+    case '--version':
+      console.log(jss.version);
+      process.exit(0);
+      break;
+    default:
+      files.push(arg);
+  }
+}
