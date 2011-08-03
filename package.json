@@ -7,9 +7,6 @@
   , "bin": {
     "stats": "./bin/stats"
   }
-  , "dependencies": {
-    "uglify-js": ">= 1.0.6"
-  }
   , "devDependencies": {
     "should": ">= 0.0.1"
   }
