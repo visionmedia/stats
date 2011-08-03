@@ -26,6 +26,12 @@ var paths = [];
 var stats = {};
 
 /**
+ * Options.
+ */
+
+var options = { format: 'json' };
+
+/**
  * Usage docs.
  */
 
@@ -35,8 +41,10 @@ var usage = [
   , ''
   , '  Options:'
   , ''
-  , '    -V, --version           Display the version of jss'
-  , '    -h, --help              Display help information'
+  , '    -f, --format <name>  Output the given format. text, json'
+  , '    -t, --text           Output human-readable plain-text stats'
+  , '    -V, --version        Display the version of jss'
+  , '    -h, --help           Display help information'
   , ''
 ].join('\n');
 
@@ -57,6 +65,10 @@ while (args.length) {
     case '--version':
       console.log(jss.version);
       process.exit(0);
+      break;
+    case '-t':
+    case '--text':
+      options.format = 'text';
       break;
     default:
       paths.push(arg);
@@ -79,5 +91,8 @@ jss.find(paths, function(err, files){
 // finished
 
 function done() {
-  process.stdout.write(JSON.stringify(stats));
+  if (options.text) {}
+  var format = jss.formats[options.format];
+  if (!format) throw new Error('invalid format "' + options.format + '"');
+  format(stats);
 }
