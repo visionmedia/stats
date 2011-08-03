@@ -4,8 +4,7 @@
  * Module dependencies.
  */
 
-var jss = require('../')
-  , fs = require('fs');
+var jss = require('../');
 
 /**
  * Arguments.
@@ -14,10 +13,10 @@ var jss = require('../')
 var args = process.argv.slice(2);
 
 /**
- * Files to process.
+ * Paths to process.
  */
 
-var files = [];
+var paths = [];
 
 /**
  * Usage docs.
@@ -53,6 +52,12 @@ while (args.length) {
       process.exit(0);
       break;
     default:
-      files.push(arg);
+      paths.push(arg);
   }
 }
+
+// process
+
+jss.find(paths, function(err, files){
+  console.log(files);
+});
