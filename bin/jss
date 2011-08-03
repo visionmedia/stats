@@ -4,7 +4,8 @@
  * Module dependencies.
  */
 
-var jss = require('../');
+var jss = require('../')
+  , fs = require('fs');
 
 /**
  * Arguments.
@@ -17,6 +18,12 @@ var args = process.argv.slice(2);
  */
 
 var paths = [];
+
+/**
+ * Statistics.
+ */
+
+var stats = {};
 
 /**
  * Usage docs.
@@ -59,5 +66,18 @@ while (args.length) {
 // process
 
 jss.find(paths, function(err, files){
-  console.log(files);
+  var pending = files.length;
+  files.forEach(function(file){
+    fs.readFile(file, 'utf8', function(err, str){
+      if (err) throw err;
+      stats[file] = jss.stats(str);
+      --pending || done();
+    });
+  });
 });
+
+// finished
+
+function done() {
+  process.stdout.write(JSON.stringify(stats));
+}
