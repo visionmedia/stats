@@ -8,4 +8,4 @@ var jss = require('../')
 
 var stats = jss.stats(fixture('objects.js'));
 stats.should.have.property('objectLiterals', 2);
-stats.should.have.property('objectsCreated', 0);
+stats.should.have.property('objectsCreated', 1);
