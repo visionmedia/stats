@@ -54,6 +54,7 @@ var usage = [
 /**
  * Handle arguments.
  */
+args.length > 0 || args.push('-h');
 
 var arg;
 while (args.length) {
