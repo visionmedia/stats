@@ -44,6 +44,7 @@ var usage = [
   , '    -f, --format <name>  Output the given format. text, json'
   , '    -j, --json           Output JSON statistics'
   , '    -t, --text           Output human-readable plain-text stats'
+  , '    -T, --totals         Output totals only'
   , '    -V, --version        Display the version of jss'
   , '    -h, --help           Display help information'
   , ''
@@ -74,6 +75,10 @@ while (args.length) {
     case '-t':
     case '--text':
       options.format = 'text';
+      break;
+    case '-T':
+    case '--totals':
+      options.totalsOnly = true;
       break;
     default:
       paths.push(arg);
@@ -108,6 +113,6 @@ function done() {
   var format = jss.formats[options.format];
   if (!format) throw new Error('invalid format "' + options.format + '"');
   var obj = { totals: totals };
-  for (var file in stats) obj[file] = stats[file];
+  if (!options.totalsOnly) for (var file in stats) obj[file] = stats[file];
   format(obj);
 }

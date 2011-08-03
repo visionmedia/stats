@@ -3,6 +3,29 @@
 
   JavaScript statistics library built on uglify-js, reporting all sorts of interesting (and non-interesting) stats. Comes complete with an extremely simply js API, as well as a CLI.
 
+## Example
+
+ The following is an example of `jss(1)` running against the nodejs core libraries, completing in less than 300ms.
+
+```
+ λ projects: jss --totals node/lib
+
+totals:
+  loc: 14855
+  bytes: 390.80 kb
+  statements: 6547
+  assignments: 3343
+  functions: 868
+  stringBytes: 10.28 kb
+  arrayLiterals: 108
+  objectLiterals: 99
+  objectsCreated: 183
+  regexpLiterals: 60
+  strings: 1211
+  numbers: 512
+  throws: 91
+```
+
 ## Statistics
 
  The following are currently supported:
