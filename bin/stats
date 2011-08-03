@@ -42,6 +42,7 @@ var usage = [
   , '  Options:'
   , ''
   , '    -f, --format <name>  Output the given format. text, json'
+  , '    -I, --ignore-errors  Ignore parse errors'
   , '    -j, --json           Output JSON statistics'
   , '    -t, --text           Output human-readable plain-text stats'
   , '    -T, --totals         Output totals only'
@@ -76,6 +77,10 @@ while (args.length) {
     case '--text':
       options.format = 'text';
       break;
+    case '-I':
+    case '--ignore-errors':
+      options.ignoreParseErrors = true;
+      break;
     case '-T':
     case '--totals':
       options.totalsOnly = true;
@@ -93,7 +98,7 @@ stats.find(paths, function(err, files){
   files.forEach(function(file){
     fs.readFile(file, 'utf8', function(err, str){
       if (err) throw err;
-      statistics[file] = stats.parse(str);
+      statistics[file] = stats.parse(str, options);
       if (totals) {
         Object.keys(statistics[file]).forEach(function(key){
           totals[key] += statistics[file][key];
