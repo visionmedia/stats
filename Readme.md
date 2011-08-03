@@ -1,7 +1,7 @@
 
 # jss
 
-  JavaScript statistics API (LOC, SLOC, assignments, string byte lengths etc) with js API and CLI.
+  JavaScript statistics library built on uglify-js, reporting all sorts of interesting (and non-interesting) stats. Comes complete with an extremely simply js API, as well as a CLI.
 
 ## Running tests
 
