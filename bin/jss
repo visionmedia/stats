@@ -113,6 +113,7 @@ function done() {
   var format = jss.formats[options.format];
   if (!format) throw new Error('invalid format "' + options.format + '"');
   var obj = { totals: totals };
+  totals.files = Object.keys(stats).length;
   if (!options.totalsOnly) for (var file in stats) obj[file] = stats[file];
   format(obj);
 }
