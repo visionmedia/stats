@@ -4,7 +4,7 @@
  */
 
 var jss = require('../')
-  , scommon = require('./common');
+  , common = require('./common');
 
 jss.should.have.property('version');
 
