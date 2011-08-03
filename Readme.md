@@ -1,7 +1,11 @@
 
 # jss
 
-  JavaScript statistics (LOC, SLOC, etc)
+  JavaScript statistics API (LOC, SLOC, assignments, string byte lengths etc) with js API and CLI.
+
+## Running tests
+
+    $ make test
 
 ## License 
 
