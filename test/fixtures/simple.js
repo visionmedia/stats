@@ -1,8 +1,8 @@
 
-var foo = 'yay';
+var foo = 'foo'
+  , bar = 'bar'
+  , baz = 'baz';
 
-if (foo) {
-  console.log('foo');
-} else {
-  console.log('bar');
-}
+console.log(foo);
+console.log(bar);
+console.log(baz);

@@ -1,7 +1,7 @@
 
-TESTS = $(shell find test -name "*.js")
+TESTS = $(shell find test -name "test.*.js")
 
 test:
-	@./test/run
+	@./test/run $(TESTS)
 
-.PHONY: test $(TESTS)
+.PHONY: test
