@@ -22,3 +22,10 @@ stats.should.have.property('statements', 4);
 stats.should.have.property('assignments', 4);
 stats.should.have.property('loc', 9);
 stats.should.have.property('bytes', 121);
+
+// test function stats
+
+var stats = jss.stats(fixture('functions.js'));
+stats.should.have.property('statements', 6);
+stats.should.have.property('assignments', 1);
+stats.should.have.property('functions', 3);
