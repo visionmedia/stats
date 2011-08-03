@@ -1,5 +1,5 @@
 
-# jss
+# stats
 
   JavaScript statistics library built on uglify-js, reporting all sorts of interesting (and non-interesting) stats. Comes complete with an extremely simple js API, as well as a CLI.
 
@@ -9,10 +9,10 @@
 
 ## Example
 
- The following is an example of `jss(1)` running against the nodejs core libraries, completing in less than 300ms.
+ The following is an example of `stats(1)` running against the nodejs core libraries, completing in less than 300ms.
 
 ```
- λ projects: jss --totals node/lib
+ λ projects: stats --totals node/lib
 
 totals:
   loc: 14855
@@ -50,13 +50,13 @@ totals:
 
 ## API
 
-### .stats(js)
+### .parse(js)
 
   Returns statistics for the given string of `js`:
 
 ```js
-var jss = require('jss');
-console.log(jss.stats(str))
+var stats = require('stats');
+console.log(stats.parse(str))
 ```
 
   Outputs something similar to:
