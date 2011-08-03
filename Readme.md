@@ -3,6 +3,10 @@
 
   JavaScript statistics library built on uglify-js, reporting all sorts of interesting (and non-interesting) stats. Comes complete with an extremely simple js API, as well as a CLI.
 
+## Installation
+
+     $ npm install -g stats
+
 ## Example
 
  The following is an example of `jss(1)` running against the nodejs core libraries, completing in less than 300ms.
