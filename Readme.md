@@ -1,7 +1,7 @@
 
 # jss
 
-  JavaScript statistics library built on uglify-js, reporting all sorts of interesting (and non-interesting) stats. Comes complete with an extremely simply js API, as well as a CLI.
+  JavaScript statistics library built on uglify-js, reporting all sorts of interesting (and non-interesting) stats. Comes complete with an extremely simple js API, as well as a CLI.
 
 ## Example
 
