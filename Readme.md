@@ -76,6 +76,23 @@ console.log(jss.stats(str))
   throws: 1 }
 ```
 
+## CLI Usage
+
+```
+
+Usage: stats [options] [file|dir ...]
+
+Options:
+
+  -f, --format <name>  Output the given format. text, json
+  -j, --json           Output JSON statistics
+  -t, --text           Output human-readable plain-text stats
+  -T, --totals         Output totals only
+  -V, --version        Display the version of stats
+  -h, --help           Display help information
+
+```
+
 ## Running tests
 
     $ make test
