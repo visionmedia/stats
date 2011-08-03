@@ -3,8 +3,8 @@
  * Module dependencies.
  */
 
-var jss = require('../')
+var stats = require('../')
   , common = require('./common');
 
-var stats = jss.stats(fixture('switch.js'));
+var stats = stats.parse(fixture('switch.js'));
 stats.should.have.property('statements', 5);

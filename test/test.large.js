@@ -3,10 +3,10 @@
  * Module dependencies.
  */
 
-var jss = require('../')
+var stats = require('../')
   , common = require('./common');
 
-var stats = jss.stats(fixture('large.js'));
+var stats = stats.parse(fixture('large.js'));
 stats.should.have.property('statements', 16);
 stats.should.have.property('assignments', 9);
 stats.should.have.property('loc', 65);

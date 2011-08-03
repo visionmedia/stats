@@ -3,12 +3,12 @@
  * Module dependencies.
  */
 
-var jss = require('../')
+var stats = require('../')
   , common = require('./common');
 
-jss.should.have.property('version');
+stats.should.have.property('version');
 
-var stats = jss.stats(fixture('simple.js'));
+var stats = stats.parse(fixture('simple.js'));
 stats.should.have.property('statements', 4);
 stats.should.have.property('assignments', 4);
 stats.should.have.property('loc', 9);

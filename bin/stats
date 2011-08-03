@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 
-var jss = require('../')
+var stats = require('../')
   , fs = require('fs');
 
 /**
@@ -23,7 +23,7 @@ var paths = [];
  * Statistics.
  */
 
-var stats = {};
+var statistics = {};
 
 /**
  * Options.
@@ -37,7 +37,7 @@ var options = { format: 'text' };
 
 var usage = [
     ''
-  , '  Usage: jss [options] [file|dir ...]'
+  , '  Usage: stats [options] [file|dir ...]'
   , ''
   , '  Options:'
   , ''
@@ -45,7 +45,7 @@ var usage = [
   , '    -j, --json           Output JSON statistics'
   , '    -t, --text           Output human-readable plain-text stats'
   , '    -T, --totals         Output totals only'
-  , '    -V, --version        Display the version of jss'
+  , '    -V, --version        Display the version of stats'
   , '    -h, --help           Display help information'
   , ''
 ].join('\n');
@@ -65,7 +65,7 @@ while (args.length) {
       process.exit(1);
     case '-V':
     case '--version':
-      console.log(jss.version);
+      console.log(stats.version);
       process.exit(0);
       break;
     case '-j':
@@ -88,18 +88,18 @@ while (args.length) {
 // process
 
 var totals;
-jss.find(paths, function(err, files){
+stats.find(paths, function(err, files){
   var pending = files.length;
   files.forEach(function(file){
     fs.readFile(file, 'utf8', function(err, str){
       if (err) throw err;
-      stats[file] = jss.stats(str);
+      statistics[file] = stats.parse(str);
       if (totals) {
-        Object.keys(stats[file]).forEach(function(key){
-          totals[key] += stats[file][key];
+        Object.keys(statistics[file]).forEach(function(key){
+          totals[key] += statistics[file][key];
         });
       } else {
-        totals = stats[file];
+        totals = statistics[file];
       }
       --pending || done();
     });
@@ -110,10 +110,12 @@ jss.find(paths, function(err, files){
 
 function done() {
   if (options.text) {}
-  var format = jss.formats[options.format];
+  var format = stats.formats[options.format];
   if (!format) throw new Error('invalid format "' + options.format + '"');
   var obj = { totals: totals };
-  totals.files = Object.keys(stats).length;
-  if (!options.totalsOnly) for (var file in stats) obj[file] = stats[file];
+  totals.files = Object.keys(statistics).length;
+  if (!options.totalsOnly) {
+    for (var file in statistics) obj[file] = statistics[file];
+  }
   format(obj);
 }

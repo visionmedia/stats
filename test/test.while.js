@@ -3,8 +3,8 @@
  * Module dependencies.
  */
 
-var jss = require('../')
+var stats = require('../')
   , common = require('./common');
 
-var stats = jss.stats(fixture('while.js'));
+var stats = stats.parse(fixture('while.js'));
 stats.should.have.property('statements', 5);

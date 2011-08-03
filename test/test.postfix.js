@@ -3,7 +3,7 @@
  * Module dependencies.
  */
 
-var jss = require('../')
+var stats = require('../')
   , common = require('./common');
 
-var stats = jss.stats('foo++');
+var stats = stats.parse('foo++');
