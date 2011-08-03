@@ -92,20 +92,16 @@ while (args.length) {
 
 // process
 
-var totals;
+var totals = {};
 stats.find(paths, function(err, files){
   var pending = files.length;
   files.forEach(function(file){
     fs.readFile(file, 'utf8', function(err, str){
       if (err) throw err;
       statistics[file] = stats.parse(str, options);
-      if (totals) {
-        Object.keys(statistics[file]).forEach(function(key){
-          totals[key] += statistics[file][key];
-        });
-      } else {
-        totals = statistics[file];
-      }
+      Object.keys(statistics[file]).forEach(function(key){
+        totals[key] = (totals[key] || 0) + statistics[file][key];
+      });
       --pending || done();
     });
   });
