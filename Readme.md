@@ -15,6 +15,7 @@
   - **throws**: total number of `throw`s
   - **strings**: total number of strings
   - **stringBytes**: total byte-length of all strings
+  - **regexpLiterals**: total number of regexp literals
   - **arrayLiterals**: total number of array literals
   - **objectLiterals**: total number of object literals
   - **objectsCreated**: total number of objects initialized with `new`
