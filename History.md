@@ -1,4 +1,12 @@
 
+0.0.4 / 2011-08-03 
+==================
+
+  * Removed uglifyjs dep (inlined)
+  * Fixed single-file stats [saschagehlich]
+  * Fixed top-level returns
+  * Fixed: show help when no args are present [criso]
+
 0.0.3 / 2011-08-03 
 ==================
 
