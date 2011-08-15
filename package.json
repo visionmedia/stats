@@ -7,6 +7,9 @@
   , "bin": {
     "stats": "./bin/stats"
   }
+  , "dependencies": {
+    "commander": "0.0.3"
+  }
   , "devDependencies": {
     "should": ">= 0.0.1"
   }
