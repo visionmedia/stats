@@ -20,7 +20,8 @@ var statistics = {};
 
 program
   .version(stats.version)
-  .option('-f, --format <name>', 'output the given format. text or json. [json]', 'json')
+  .option('-f, --format <name>', 'output the given format. text or json. [text]', 'text')
+  .option('-j, --json', 'output json stats')
   .option('-t, --text', 'output human-readable text stats')
   .option('-T, --totals', 'output totals only')
   .parse(process.argv);
@@ -28,6 +29,7 @@ program
 // format shortcuts
 
 if (program.text) program.format = 'text';
+if (program.json) program.format = 'json';
 
 // paths
 
