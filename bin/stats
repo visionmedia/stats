@@ -39,6 +39,7 @@ var paths = program.args;
 
 var totals = {};
 stats.find(paths, function(err, files){
+  if (err) throw err;
   var pending = files.length;
   files.forEach(function(file){
     fs.readFile(file, 'utf8', function(err, str){
