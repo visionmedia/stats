@@ -5,19 +5,8 @@
  */
 
 var stats = require('../')
+  , program = require('commander')
   , fs = require('fs');
-
-/**
- * Arguments.
- */
-
-var args = process.argv.slice(2);
-
-/**
- * Paths to process.
- */
-
-var paths = [];
 
 /**
  * Statistics.
@@ -29,77 +18,33 @@ var statistics = {};
  * Options.
  */
 
-var options = { format: 'text' };
+program
+  .version(stats.version)
+  .option('-f, --format <name>', 'output the given format. text or json. [text]', 'text')
+  .option('-j, --json', 'output json stats')
+  .option('-t, --text', 'output human-readable text stats')
+  .option('-T, --totals', 'output totals only')
+  .parse(process.argv);
 
-/**
- * Usage docs.
- */
+// format shortcuts
 
-var usage = [
-    ''
-  , '  Usage: stats [options] [file|dir ...]'
-  , ''
-  , '  Options:'
-  , ''
-  , '    -f, --format <name>  Output the given format. text, json'
-  , '    -I, --ignore-errors  Ignore parse errors'
-  , '    -j, --json           Output JSON statistics'
-  , '    -t, --text           Output human-readable plain-text stats'
-  , '    -T, --totals         Output totals only'
-  , '    -V, --version        Display the version of stats'
-  , '    -h, --help           Display help information'
-  , ''
-].join('\n');
+if (program.text) program.format = 'text';
+if (program.json) program.format = 'json';
 
-/**
- * Handle arguments.
- */
-args.length > 0 || args.push('-h');
+// paths
 
-var arg;
-while (args.length) {
-  arg = args.shift();
-  switch (arg) {
-    case '-h':
-    case '--help':
-    case 'help':
-      console.log(usage);
-      process.exit(1);
-    case '-V':
-    case '--version':
-      console.log(stats.version);
-      process.exit(0);
-      break;
-    case '-j':
-    case '--json':
-      options.format = 'json';
-      break;
-    case '-t':
-    case '--text':
-      options.format = 'text';
-      break;
-    case '-I':
-    case '--ignore-errors':
-      options.ignoreParseErrors = true;
-      break;
-    case '-T':
-    case '--totals':
-      options.totalsOnly = true;
-      break;
-    default:
-      paths.push(arg);
-  }
-}
+var paths = program.args;
 
 // process
 
 var totals = {};
 stats.find(paths, function(err, files){
+  if (err) throw err;
   var pending = files.length;
   files.forEach(function(file){
     fs.readFile(file, 'utf8', function(err, str){
       if (err) throw err;
-      statistics[file] = stats.parse(str, options);
+      statistics[file] = stats.parse(str, program);
       Object.keys(statistics[file]).forEach(function(key){
         totals[key] = (totals[key] || 0) + statistics[file][key];
       });
@@ -111,12 +56,12 @@ stats.find(paths, function(err, files){
 // finished
 
 function done() {
-  if (options.text) {}
-  var format = stats.formats[options.format];
-  if (!format) throw new Error('invalid format "' + options.format + '"');
+  if (program.text) {}
+  var format = stats.formats[program.format];
+  if (!format) throw new Error('invalid format "' + program.format + '"');
   var obj = { totals: totals };
   totals.files = Object.keys(statistics).length;
-  if (!options.totalsOnly) {
+  if (!program.totals) {
     for (var file in statistics) obj[file] = statistics[file];
   }
   format(obj);

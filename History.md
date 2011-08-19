@@ -1,4 +1,11 @@
 
+0.0.6 / 2011-08-15 
+==================
+
+  * Added `commander` dependency
+  * Changed stats(1) to use the commander module
+  * Fixed error messages for files not found (now throwing)
+
 0.0.5 / 2011-08-03 
 ==================
 
