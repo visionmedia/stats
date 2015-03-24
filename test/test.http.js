@@ -11,5 +11,5 @@ stats.should.have.property('strings', 4);
 stats.should.have.property('numbers', 1);
 stats.should.have.property('statements', 4);
 stats.should.have.property('assignments', 1);
-stats.should.have.property('stringBytes', 38);
+stats.should.have.property('stringBytes', 47);
 stats.should.have.property('loc', 11);

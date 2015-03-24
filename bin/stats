@@ -4,9 +4,9 @@
  * Module dependencies.
  */
 
-var stats = require('../')
-  , program = require('commander')
-  , fs = require('fs');
+var stats = require('../'),
+  program = require('commander'),
+  fs = require('fs');
 
 /**
  * Statistics.
@@ -38,20 +38,17 @@ var paths = program.args;
 // process
 
 var totals = {};
-stats.find(paths, function(err, files){
-  if (err) throw err;
-  var pending = files.length;
-  files.forEach(function(file){
-    fs.readFile(file, 'utf8', function(err, str){
-      if (err) throw err;
-      statistics[file] = stats.parse(str, program);
-      Object.keys(statistics[file]).forEach(function(key){
-        totals[key] = (totals[key] || 0) + statistics[file][key];
-      });
-      --pending || done();
-    });
+
+stats.find(paths, {
+  match: /.\.js$/,
+  exclude: /.\.min\.js$/,
+  excludeDir: ['node_modules']
+}, function(content, file) {
+  statistics[file] = stats.parse(content);
+  Object.keys(statistics[file]).forEach(function(key) {
+    totals[key] = (totals[key] || 0) + statistics[file][key];
   });
-});
+}, done);
 
 // finished
 
@@ -59,7 +56,9 @@ function done() {
   if (program.text) {}
   var format = stats.formats[program.format];
   if (!format) throw new Error('invalid format "' + program.format + '"');
-  var obj = { totals: totals };
+  var obj = {
+    totals: totals
+  };
   totals.files = Object.keys(statistics).length;
   if (!program.totals) {
     for (var file in statistics) obj[file] = statistics[file];

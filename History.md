@@ -1,3 +1,9 @@
+1.1.0 / 2015-03-24
+=================
+  
+  * Modern rewrite of parser and file finder
+  * Finder now excludes node_modules directory and minified javascript
+  * Updated tests to reflect new parser (Esprima)
 
 1.0.0 / 2012-02-26 
 ==================
